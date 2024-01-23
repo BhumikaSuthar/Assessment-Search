@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.PageObjects.GoogleSearch;
+import com.PageObjects.YahooSearch;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -30,6 +31,7 @@ public class Test_Google extends BaseDriver{
 	ExtentHtmlReporter htmlReporter;
 	ExtentReports extent;
 	ExtentTest test;
+	YahooSearch yahooSearch;
 	
 	@BeforeTest
     public void startReport() {
@@ -57,7 +59,7 @@ public class Test_Google extends BaseDriver{
 	{
 		driver = initalizeDriver();
 		googleSearch = new GoogleSearch(driver,"TC1");
-		googleSearch.searchKeyword("India");
+		googleSearch.searchKeyword();
 	}
 	
 	@Test(description = "Verify search functionality and title heading with input keyword")
@@ -65,8 +67,25 @@ public class Test_Google extends BaseDriver{
 	{
 		driver = initalizeDriver();
 		googleSearch = new GoogleSearch(driver,"TC2");
-		googleSearch.searchKeyword("India");	
+		googleSearch.searchKeyword();	
 		assertEquals("United States", googleSearch.getSearchTitle());
+	}
+	
+	@Test(description = "Verify search functionality with input keyword")
+	void test_SearchFunctionality() throws IOException
+	{
+		driver = initalizeDriver();
+		yahooSearch = new YahooSearch(driver,"TC1");
+		yahooSearch.searchKeyword();
+	}
+	
+	@Test(description = "Verify search functionality and title heading with input keyword")
+	void test_SearchFunctionalityAndGetTitle() throws IOException
+	{
+		driver = initalizeDriver();
+		yahooSearch = new YahooSearch(driver,"TC2");
+		yahooSearch.searchKeyword();	
+		assertEquals("United States", yahooSearch.getSearchTitle());
 	}
 
 	@AfterMethod
